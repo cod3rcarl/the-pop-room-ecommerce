@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Message from '../components/Message';
 
 const Item = ({ item }) => {
   const [toggle, setToggle] = useState(true);
   const [showText, setShowText] = useState('Add to Basket');
-  const [message, setMessage] = useState('');
 
   const history = useHistory();
 
@@ -28,7 +26,6 @@ const Item = ({ item }) => {
     setToggle(!toggle);
   };
   const handleAddToBasket = () => {
-    setMessage('Added to Basket');
     history.push(`/basket/${item._id}?qty=1`);
   };
   return (
@@ -41,7 +38,7 @@ const Item = ({ item }) => {
       <Button onClick={handleAddToBasket} type='button' className='btn-block' disabled={item.countInStock === 0}>
         {showText}
       </Button>
-      <Message variant='success'>{message}</Message>
+
       <Card.Body>
         {' '}
         <Link to={`/item/${item._id}`}>

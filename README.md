@@ -1,4 +1,4 @@
-Deployment to heroku
+# Deployment to heroku
 
 - Ensure path to the build folder is in the gitignore file so that it does not get pushed
 
@@ -11,3 +11,4 @@ Deployment to heroku
 - Ensure everything has been pushed to git.
 - heroku git:remote -a <your heroku app name>
 - git push heroku main (or master if you build on master branch)
+- Enter environment variables into heroku config vars.
