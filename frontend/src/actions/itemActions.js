@@ -22,11 +22,11 @@ import {
   ITEM_TOP_FAIL,
 } from '../constants/itemConstants';
 import axios from 'axios';
-
+const url = process.env.SERVER_URL;
 export const listItems = (keyword = '', pageNumber = '') => async (dispatch) => {
   try {
     dispatch({ type: ITEM_LIST_REQUEST });
-    const { data } = await axios.get(`http://localhost:5000/api/items?keyword=${keyword}&pageNumber=${pageNumber}`);
+    const { data } = await axios.get(`${url}/api/items?keyword=${keyword}&pageNumber=${pageNumber}`);
 
     dispatch({ type: ITEM_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -36,7 +36,7 @@ export const listItems = (keyword = '', pageNumber = '') => async (dispatch) => 
 export const filterItems = (name) => async (dispatch) => {
   try {
     dispatch({ type: ITEM_FILTER_REQUEST });
-    const { data } = await axios.get(`http://localhost:5000/api/items/series/${name}`);
+    const { data } = await axios.get(`${url}/api/items/series/${name}`);
 
     dispatch({ type: ITEM_FILTER_SUCCESS, payload: data });
   } catch (error) {
@@ -46,7 +46,7 @@ export const filterItems = (name) => async (dispatch) => {
 export const listItemDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: ITEM_DETAILS_REQUEST });
-    const { data } = await axios.get(`http://localhost:5000/api/items/${id}`);
+    const { data } = await axios.get(`${url}/api/items/${id}`);
 
     dispatch({ type: ITEM_DETAILS_SUCCESS, payload: data });
   } catch (error) {
@@ -67,7 +67,7 @@ export const deleteItem = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`http://localhost:5000/api/items/${id}`, config);
+    await axios.delete(`${url}/api/items/${id}`, config);
 
     dispatch({ type: ITEM_DELETE_SUCCESS });
   } catch (error) {
@@ -89,7 +89,7 @@ export const createItem = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`http://localhost:5000/api/items`, {}, config);
+    const { data } = await axios.post(`${url}/api/items`, {}, config);
 
     dispatch({ type: ITEM_CREATE_SUCCESS, payload: data });
   } catch (error) {
@@ -110,7 +110,7 @@ export const updateItem = (item) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`http://localhost:5000/api/items/${item._id}`, item, config);
+    const { data } = await axios.put(`${url}/api/items/${item._id}`, item, config);
 
     dispatch({ type: ITEM_UPDATE_SUCCESS, payload: data });
   } catch (error) {
@@ -122,7 +122,7 @@ export const listTopItems = () => async (dispatch) => {
   console.log('hits here');
   try {
     dispatch({ type: ITEM_TOP_REQUEST });
-    const { data } = await axios.get(`http://localhost:5000/api/items`);
+    const { data } = await axios.get(`${url}/api/items`);
 
     dispatch({ type: ITEM_TOP_SUCCESS, payload: data });
   } catch (error) {
