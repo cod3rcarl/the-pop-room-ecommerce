@@ -19,13 +19,16 @@ const HomePage = ({ match }) => {
   const itemList = useSelector((state) => state.itemList);
   const { loading, error, items, page, pages } = itemList;
 
-  const seriesList = items.map((item) => {
-    return item.series;
-  });
-  const filterSeries = seriesList.filter((x, i) => {
-    return seriesList.indexOf(x) === i;
-  });
-  localStorage.setItem('series', JSON.stringify(filterSeries));
+  if (items) {
+    const seriesList = items.map((item) => {
+      return item.series;
+    });
+    const filterSeries = seriesList.filter((x, i) => {
+      return seriesList.indexOf(x) === i;
+    });
+
+    localStorage.setItem('series', JSON.stringify(filterSeries));
+  }
 
   useEffect(() => {
     dispatch(listItems(keyword, pageNumber));
