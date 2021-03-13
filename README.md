@@ -1,3 +1,7 @@
+# The Pop Room
+
+![carousel](/public/the-pop-room.png 'Home Page')
+
 # Deployment to heroku
 
 - Ensure path to the build folder is in the gitignore file so that it does not get pushed
