@@ -1,30 +1,19 @@
 const express = require('express');
-const asyncHandler = require('express-async-handler');
-const Item = require('../models/item.model.js');
-
 const router = express.Router();
+const { protect, isAdmin } = require('../middleware/authMiddleware');
+const { getItems, getItemById, deleteItem, createItem, updateItem, getItemsBySeries, getTopItems } = require('../controllers/item.controller');
 
-router.get(
-  '/',
-  asyncHandler(async (req, res) => {
-    const items = await Item.find({});
-    res.status(200).json(items);
-  })
-);
+router
+  .route('/')
+  .get(getItems)
+  .post(protect, isAdmin, createItem);
+router
+  .route('/:id')
+  .get(getItemById)
+  .delete(protect, isAdmin, deleteItem)
+  .put(protect, isAdmin, updateItem);
 
-router.get(
-  '/:id',
-  asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const item = await Item.findById(id);
-
-    if (item) {
-      res.status(200).json(item);
-    } else {
-      res.status(404);
-      throw new Error('Product not found');
-    }
-  })
-);
+router.get('/series/:name', getItemsBySeries);
+router.get('/top', getTopItems);
 
 module.exports = router;

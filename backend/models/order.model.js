@@ -13,9 +13,9 @@ const OrderSchema = mongoose.Schema(
         qty: { type: Number, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
-        product: {
+        item: {
           type: mongoose.Schema.Types.ObjectId,
-          required: [true, 'Please add a product'],
+          required: [true, 'Please add an item'],
           ref: 'Item',
         },
       },
@@ -30,7 +30,7 @@ const OrderSchema = mongoose.Schema(
         type: String,
         required: true,
       },
-      postCode: {
+      postcode: {
         type: String,
         required: true,
       },

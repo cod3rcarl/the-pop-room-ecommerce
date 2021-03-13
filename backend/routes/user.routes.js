@@ -1,14 +1,24 @@
 const express = require('express');
-
+const { protect, isAdmin } = require('../middleware/authMiddleware');
 const router = express.Router();
+const { authenticateUser, getUserProfile, registerUser, updateUserProfile, getUsers, deleteUser, updateUser, getUserById } = require('../controllers/user.controller');
 
-router.get('/', (req, res) => {
-  res.send('APP is running');
-});
+router.post('/login', authenticateUser);
 
-router.get('/:id', (req, res) => {
-  const item = items.find((i) => i._id === req.params.id);
-  res.json(item);
-});
+router
+  .route('/')
+  .get(protect, isAdmin, getUsers)
+  .post(registerUser);
+
+router
+  .route('/profile')
+  .get(protect, getUserProfile)
+  .put(protect, updateUserProfile);
+
+router
+  .route('/:id')
+  .delete(protect, isAdmin, deleteUser)
+  .get(protect, isAdmin, getUserById)
+  .put(protect, isAdmin, updateUser);
 
 module.exports = router;
