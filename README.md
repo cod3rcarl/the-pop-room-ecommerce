@@ -1,6 +1,6 @@
 # The Pop Room
 
-![carousel](/public/the-pop-room.png 'Home Page')
+![carousel](/frontend/public/the-pop-room.png 'Home Page')
 
 # Deployment to heroku
 
