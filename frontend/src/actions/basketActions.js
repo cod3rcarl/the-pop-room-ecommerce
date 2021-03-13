@@ -1,8 +1,8 @@
 import { BASKET_ADD_ITEM, BASKET_REMOVE_ITEM, BASKET_SAVE_DELIVERY_ADDRESS, BASKET_SAVE_PAYMENT_METHOD } from '../constants/basketConstants';
 import axios from 'axios';
-const url = <process className='env SERVER_URL'></process>;
+
 export const addToBasket = (id, qty) => async (dispatch, getState) => {
-  const { data } = await axios.get(`${url}/api/items/${id}`);
+  const { data } = await axios.get(`/api/items/${id}`);
 
   dispatch({ type: BASKET_ADD_ITEM, payload: { item: data._id, name: data.name, image: data.image_front, price: data.price, countInStock: data.countInStock, qty } });
 
