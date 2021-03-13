@@ -4,7 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 
 const Filter = () => {
   const items = JSON.parse(localStorage.getItem('series'));
-  console.log(items);
+
   return (
     <Dropdown className='mr-sm-2 ml-sm-5 mt-2'>
       <Dropdown.Toggle variant='primary' id='dropdown-basic'>
